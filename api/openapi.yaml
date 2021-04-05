@@ -1,0 +1,147 @@
+openapi: 3.0.0
+info:
+  description: Creting openApi 3.0 for Spring
+  title: The Employee API
+  version: "0.1"
+servers:
+- url: /
+paths:
+  /employee:
+    description: Get all the employee data
+    get:
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Employee'
+                type: array
+          description: returning all the employees data
+      x-accepts: application/json
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/Employee'
+              type: array
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Employee'
+                type: array
+          description: returning inserted employee
+      x-contentType: application/json
+      x-accepts: application/json
+    put:
+      description: put operation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/Employee'
+              type: array
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Employee'
+                type: array
+          description: returning inserted employee
+      x-contentType: application/json
+      x-accepts: application/json
+  /employee/{name}:
+    description: get employees with name
+    get:
+      description: returning all emplyoees with names
+      parameters:
+      - explode: false
+        in: path
+        name: name
+        required: true
+        schema:
+          example: sumit
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Employee'
+                type: array
+          description: success response
+      x-accepts: application/json
+  /employee/{id}:
+    delete:
+      parameters:
+      - description: Employee id to delete employee in
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/Employee'
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Employee'
+                type: array
+          description: returning deleted employee
+      x-accepts: application/json
+    description: get employees with name
+    get:
+      description: returning all emplyoees with names
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: 1
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Employee'
+                type: array
+          description: success response
+      x-accepts: application/json
+components:
+  schemas:
+    Employee:
+      description: this is the employee model
+      example:
+        name: name
+        id: 0
+        salary: 6
+      properties:
+        id:
+          description: the id of employee
+          type: integer
+        name:
+          description: name of employee
+          type: string
+        salary:
+          description: salary of employee
+          type: integer
+      type: object
+
